@@ -1,0 +1,8 @@
+.git
+.gitignore
+reports
+logs
+*.md
+.idea
+.vscode
+**/*.bak
