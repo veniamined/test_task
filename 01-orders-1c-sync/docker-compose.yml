@@ -1,16 +1,8 @@
-# docker-compose для запуска модуля сверки под Docker Desktop (Windows / macOS / Linux).
-# Использование:
-#   docker compose up --build          # обычный прогон
-#   docker compose run --rm sync php bugs/OrderTotal.php   # самопроверка баг-фикса
-#   docker compose run --rm sync php bin/sync.php --verbose # подробный режим
-
 services:
   sync:
     build: .
     container_name: mp-1c-sync
     volumes:
-      # Маунтим весь проект — отчёты и логи попадают в ./reports и ./logs на хосте,
-      # без магии и без необходимости пересобирать образ при правках кода.
       - ./data:/app/data:ro
       - ./reports:/app/reports
       - ./logs:/app/logs
@@ -18,5 +10,3 @@ services:
       - ./bin:/app/bin:ro
       - ./bugs:/app/bugs:ro
     working_dir: /app
-    # Команда по умолчанию задаётся в Dockerfile (CMD). При желании её можно
-    # переопределить через `docker compose run --rm sync <команда>`.
